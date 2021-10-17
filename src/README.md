@@ -1,4 +1,4 @@
-# itrap
+# ITRAP
 
 ## Project setup
 ```
