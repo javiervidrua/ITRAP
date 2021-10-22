@@ -47,13 +47,22 @@
       <v-spacer></v-spacer>-->
       
       <v-spacer></v-spacer>
-      <v-toolbar-title class="font-weight-light mr-16">Information Technology Risk Auditing Platform</v-toolbar-title>
+      <!--<v-toolbar-title class="font-weight-light mr-16">Information Technology Risk Auditing Platform</v-toolbar-title>-->
       <v-spacer></v-spacer>
     </v-app-bar>
 
     <v-main>
       <router-view/>
     </v-main>
+
+    <v-footer padless>
+      <v-col
+        class="text-center"
+        cols="12"
+      >
+        {{ new Date().getFullYear() }} — <strong>Information Technology Risk Auditing Platform</strong>
+      </v-col>
+    </v-footer>
   </v-app>
 </template>
 
@@ -67,14 +76,15 @@ document.title="ITRAP";
 export default {
   name: 'App',
 
-  data: () => ({
-    //
-    drawer: true,
+  data: () => {
+    return {
+      drawer: true,
 
-    navigationDrawerItems: [
-      { icon: 'mdi-chart-box', text: 'Quick audit', link: '/'},
-      { icon: 'mdi-chart-bar-stacked', text: 'Complete risk audit', link: 'completeriskaudit'},
-    ]
-  }),
+      navigationDrawerItems: [
+        { icon: 'mdi-chart-box', text: 'Quick audit', link: '/'},
+        { icon: 'mdi-chart-bar-stacked', text: 'Complete risk audit', link: 'completeriskaudit'},
+      ]
+    }
+  },
 };
 </script>
