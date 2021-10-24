@@ -82,7 +82,7 @@ export default {
 
       navigationDrawerItems: [
         { icon: 'mdi-chart-box', text: 'Quick audit', link: '/'},
-        { icon: 'mdi-chart-bar-stacked', text: 'Complete risk audit', link: 'completeriskaudit'},
+        { icon: 'mdi-chart-bar-stacked', text: 'Custom risk audit', link: 'customriskaudit'},
       ]
     }
   },
