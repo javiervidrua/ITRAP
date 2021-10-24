@@ -51,13 +51,7 @@
                       ></v-text-field>-->
                       <v-select
                         v-model="editedItem.category"
-                        :items="[ 'Project size',
-                                  'Consequences to the organization',
-                                  'Type of client',
-                                  'Production process',
-                                  'Development environment',
-                                  'Technology',
-                                  'Team experience']"
+                        :items="categories"
                         label="Category"
                         solo
                       ></v-select>
@@ -72,7 +66,7 @@
                       ></v-text-field>-->
                       <v-select
                         v-model="editedItem.probability"
-                        :items="['1','2','3','4','5']"
+                        :items="probabilities"
                         label="Probability"
                         solo
                       ></v-select>
@@ -84,7 +78,7 @@
                       ></v-text-field>-->
                       <v-select
                         v-model="editedItem.consequences"
-                        :items="['1','2','3','4','5']"
+                        :items="consequences"
                         label="Consequences"
                         solo
                       ></v-select>
@@ -229,6 +223,20 @@ export default {
           consequences: "2",
         },
       ],
+
+      categories: [ 'Project size',
+        'Consequences to the organization',
+        'Type of client',
+        'Production process',
+        'Development environment',
+        'Technology',
+        'Team experience'],
+
+      probabilities: ['1','2','3','4','5'],
+
+      consequences: ['1','2','3','4','5'],
+
+
       editedIndex: -1,
       editedItem: {
         name: "",
