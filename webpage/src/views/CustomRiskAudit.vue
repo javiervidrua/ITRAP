@@ -3,18 +3,25 @@
     <v-data-table
       :headers="headers"
       :items="risks"
-      sort-by="calories"
+      :sort-by="['probability', 'consequences']"
+      :sort-desc="[true, true]"
+      :items-per-page="-1"
+      no-data-text="There are no risks on the table"
+      no-results-text="There are no risks on the table"
       class="elevation-1">
       
       <template v-slot:top>
         <v-toolbar flat>
           
-          <v-toolbar-title>Risks</v-toolbar-title>
+          <v-toolbar-title>Risk management</v-toolbar-title>
           <v-divider class="mx-4" inset vertical></v-divider>
           <v-spacer></v-spacer>
 
           <v-dialog v-model="dialog" max-width="500px">
             <template v-slot:activator="{ on, attrs }">
+              <v-btn color="red" dark class="mb-2 mx-2" @click="dialogEmpty=true">
+                Empty the table
+              </v-btn>
               <v-btn color="green" dark class="mb-2" v-bind="attrs" v-on="on">
                 New risk
               </v-btn>
@@ -28,35 +35,59 @@
               <v-card-text>
                 <v-container>
                   <v-row>
-                    <v-col cols="12" sm="6" md="4">
+                    <v-col>
                       <v-text-field
                         v-model="editedItem.name"
-                        label="Dessert name"
+                        label="Risk name"
                       ></v-text-field>
                     </v-col>
-                    <v-col cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.calories"
-                        label="Calories"
-                      ></v-text-field>
+                  </v-row>
+
+                  <v-row>
+                    <v-col>
+                      <!--<v-text-field
+                        v-model="editedItem.category"
+                        label="Category"
+                      ></v-text-field>-->
+                      <v-select
+                        v-model="editedItem.category"
+                        :items="[ 'Project size',
+                                  'Consequences to the organization',
+                                  'Type of client',
+                                  'Production process',
+                                  'Development environment',
+                                  'Technology',
+                                  'Team experience']"
+                        label="Category"
+                        solo
+                      ></v-select>
                     </v-col>
-                    <v-col cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.fat"
-                        label="Fat (g)"
-                      ></v-text-field>
+                  </v-row>
+
+                  <v-row>
+                    <v-col cols="12" sm="6">
+                      <!--<v-text-field
+                        v-model="editedItem.probability"
+                        label="Probability"
+                      ></v-text-field>-->
+                      <v-select
+                        v-model="editedItem.probability"
+                        :items="['1','2','3','4','5']"
+                        label="Probability"
+                        solo
+                      ></v-select>
                     </v-col>
-                    <v-col cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.carbs"
-                        label="Carbs (g)"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.protein"
-                        label="Protein (g)"
-                      ></v-text-field>
+                    <v-col cols="12" sm="6">
+                      <!--<v-text-field
+                        v-model="editedItem.consequences"
+                        label="Consequences"
+                      ></v-text-field>-->
+                      <v-select
+                        v-model="editedItem.consequences"
+                        :items="['1','2','3','4','5']"
+                        label="Consequences"
+                        solo
+                      ></v-select>
                     </v-col>
                   </v-row>
                 </v-container>
@@ -89,6 +120,21 @@
             </v-card>
           </v-dialog>
 
+          <v-dialog v-model="dialogEmpty" max-width="500px">
+            <v-card>
+              <v-card-title class="text-h5"
+                >Are you sure you want to empty the table?</v-card-title
+              >
+              <v-divider></v-divider>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="green" dark @click="risks=[]; dialogEmpty=false">OK</v-btn>
+                <v-btn color="red" dark @click="dialogEmpty=false">Cancel</v-btn>
+                <v-spacer></v-spacer>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+
         </v-toolbar>
       </template>
 
@@ -102,7 +148,11 @@
       </template>
 
       <template v-slot:no-data>
-        There are no risks on the table
+        <v-btn
+          color="primary"
+          @click="risks = demoRisks">
+          Fill with demo data
+        </v-btn>
       </template>
     </v-data-table>
   </v-container>
@@ -121,105 +171,76 @@ export default {
     return {
       dialog: false,
       dialogDelete: false,
+      dialogEmpty: false,
       headers: [
         {
-          text: "Dessert (100g serving)",
+          text: "Risk",
           align: "start",
-          sortable: false,
+          sortable: true,
           value: "name",
         },
-        { text: "Calories", value: "calories" },
-        { text: "Fat (g)", value: "fat" },
-        { text: "Carbs (g)", value: "carbs" },
-        { text: "Protein (g)", value: "protein" },
+        { text: "Category", value: "category" },
+        { text: "Probability (1-5)", value: "probability" },
+        { text: "Consequences (1-5)", value: "consequences" },
         { text: "Actions", value: "actions", sortable: false },
       ],
-      risks: [
+      risks: [],
+      demoRisks: [
         {
-          name: "Frozen Yogurt",
-          calories: 159,
-          fat: 6.0,
-          carbs: 24,
-          protein: 4.0,
+          name: "The client will change the requirements",
+          category: "Project size",
+          probability: "2",
+          consequences: "3",
         },
         {
-          name: "Ice cream sandwich",
-          calories: 237,
-          fat: 9.0,
-          carbs: 37,
-          protein: 4.3,
+          name: "There are shortfalls in technical knowledge",
+          category: "Consequences to the organization",
+          probability: "4",
+          consequences: "5",
         },
         {
-          name: "Eclair",
-          calories: 262,
-          fat: 16.0,
-          carbs: 23,
-          protein: 6.0,
+          name: "The client is erratic",
+          category: "Type of client",
+          probability: "5",
+          consequences: "1",
         },
         {
-          name: "Cupcake",
-          calories: 305,
-          fat: 3.7,
-          carbs: 67,
-          protein: 4.3,
+          name: "Old computer may explode",
+          category: "Production process",
+          probability: "1",
+          consequences: "3",
         },
         {
-          name: "Gingerbread",
-          calories: 356,
-          fat: 16.0,
-          carbs: 49,
-          protein: 3.9,
+          name: "Another risk",
+          category: "Development environment",
+          probability: "2",
+          consequences: "1",
         },
         {
-          name: "Jelly bean",
-          calories: 375,
-          fat: 0.0,
-          carbs: 94,
-          protein: 0.0,
+          name: "Yet another risk",
+          category: "Technology",
+          probability: "3",
+          consequences: "3",
         },
         {
-          name: "Lollipop",
-          calories: 392,
-          fat: 0.2,
-          carbs: 98,
-          protein: 0,
-        },
-        {
-          name: "Honeycomb",
-          calories: 408,
-          fat: 3.2,
-          carbs: 87,
-          protein: 6.5,
-        },
-        {
-          name: "Donut",
-          calories: 452,
-          fat: 25.0,
-          carbs: 51,
-          protein: 4.9,
-        },
-        {
-          name: "KitKat",
-          calories: 518,
-          fat: 26.0,
-          carbs: 65,
-          protein: 7,
+          name: "Yet another risk more",
+          category: "Team experience",
+          probability: "4",
+          consequences: "2",
         },
       ],
       editedIndex: -1,
       editedItem: {
         name: "",
-        calories: 0,
-        fat: 0,
-        carbs: 0,
-        protein: 0,
+        category: "",
+        probability: "",
+        consequences: "",
       },
       defaultItem: {
         name: "",
-        calories: 0,
-        fat: 0,
-        carbs: 0,
-        protein: 0,
+        category: "",
+        probability: "",
+        consequences: "",
       },
     };
   },
@@ -237,15 +258,20 @@ export default {
     dialogDelete(val) {
       val || this.closeDelete();
     },
+    // Whenever the variable risks changes
+    risks: function () {
+      // Store to localStorage
+      localStorage.setItem("risks", JSON.stringify(this.risks));
+    },
   },
 
+  // When the webapp is created
   created() {
-    this.initialize();
+    // Load from localStorage
+    this.risks = JSON.parse(localStorage.getItem("risks"));
   },
 
   methods: {
-    initialize() {},
-
     editItem(item) {
       this.editedIndex = this.risks.indexOf(item);
       this.editedItem = Object.assign({}, item);

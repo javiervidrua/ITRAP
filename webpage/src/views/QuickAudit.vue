@@ -1,18 +1,18 @@
 <template>
   <v-row
     justify="center">
-    <v-col cols="6">
+    <v-col cols="12" xl="6" lg="8" md="12">
 
       <v-container
         v-if="showStepper">
         <v-card>
           <v-card-title class="ml-4">Questionary</v-card-title>
           <v-divider></v-divider>
-          <v-card-content class="mx-8">
+          <v-container>
             <v-stepper
               v-model="step"
               vertical
-              class="mx-8">
+              class="mx-8 pb-0">
               
               <v-stepper-step
                 class="py-2 pt-4"
@@ -551,7 +551,7 @@
                 </v-btn>
               </v-stepper-content>
             </v-stepper>
-          </v-card-content>
+          </v-container>
         </v-card>
       </v-container>
 
@@ -560,7 +560,7 @@
         <v-card class="pb-4">
           <v-card-title class="ml-4">Results</v-card-title>
           <v-divider></v-divider>
-          <v-card-content>
+          <v-container>
             <v-card
               v-if="results.length === 0"
               class="ml-8 mt-8 mr-8 mb-2">
@@ -648,7 +648,7 @@
                 </v-expansion-panel-content>
               </v-expansion-panel>
             </v-expansion-panels>-->
-          </v-card-content>
+          </v-container>
         </v-card>
       </v-container>
 
@@ -684,7 +684,7 @@
         answers: {
           1: {
             question: "Personnel shortfalls",
-            solutions: ["Staffing with top talent", "Job matching", "Teambuilding", "Morale building", "Cross-training", "Pre-scheduling kay people"]
+            solutions: ["Staffing with top talent", "Job matching", "Teambuilding", "Morale building", "Cross-training", "Pre-scheduling key people"]
             },
           2: {
             question: "Unrealistic schedules and budgets",
@@ -704,7 +704,7 @@
             },
           6: {
             question: "Continuous stream of requirement changes",
-            solutions: ["High change threshhold", "Information hiding", "Incremental development (defer changes to later increment)"]
+            solutions: ["High change threshold", "Information hiding", "Incremental development (defer changes to later increment)"]
             },
           7: {
             question: "Shortfalls in externally furnished components",
