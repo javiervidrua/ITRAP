@@ -20,6 +20,7 @@ export default new Vuetify({
       light: {
         primary: '#3495dd', // '#207BBE',
         secondary: '#b0bec5',
+        terciary: '#363636',
         accent: '#822cb1', //'#8c9eff',
         error: '#b71c1c',
       },

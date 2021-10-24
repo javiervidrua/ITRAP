@@ -3,541 +3,559 @@
     <v-row
       justify="center">
       <v-col cols="6">
-        <v-stepper
-          v-model="step"
-          vertical
-          class="mx-8 my-4"
-          v-if="showStepper"
-        >
-          
-          <v-stepper-step
-            class="py-2 pt-4"
-            :complete="step > 1"
-            step="1"
-            color="primary">
-            Question 1/10
-            <small></small>
-          </v-stepper-step>
-          <v-stepper-content
-            step="1">
-            <v-card
-              color="white lighten-1"
-              class="ma-1 mb-4">
-              <v-card-title class="font-weight-regular pb-0 mx-0">
-                Are there any type of personnel shortfalls?
-              </v-card-title>
-              <v-card-actions class="ml-2">
-                <v-radio-group
-                  class="my-0 pb-0 pl-4"
-                  v-model="questions['1']"
-                  column>
-                  <v-radio
-                    label="Yes"
-                    color="primary"
-                    value="true">
-                  </v-radio>
-                  <v-radio
-                    label="No"
-                    color="primary"
-                    value="false">
-                  </v-radio>
-                </v-radio-group>
-              </v-card-actions>
-              <!--<v-btn
-                :dark="questions['1'] !== null"
-                color="green"
-                :disabled="!questions['1']"
-                @click="step = 2"
-                class="ml-4 mb-4">
-                Continue
-              </v-btn>-->
-            </v-card>
-            <!-- WHEN COPY-PASTING BE CAREFUL AND MAKE SURE YOU CHANGE question1 TO questionX, ABOVE AND BELOW -->
-            <v-btn
-              :dark="questions['1'] !== null"
-              color="green"
-              :disabled="!questions['1']"
-              @click="step = 2"
-              class="ml-1">
-              Continue
-            </v-btn>
-          </v-stepper-content>
 
-          <v-stepper-step
-            class="py-2"
-            :complete="step > 2"
-            step="2"
-            color="primary">
-            Question 2/10
-            <small></small>
-          </v-stepper-step>
-          <v-stepper-content
-            step="2">
-            <v-card
-              color="white lighten-1"
-              class="ma-1 mb-4">
-              <v-card-title class="font-weight-regular pb-0 mx-0">
-                Are you using unrealistic schedules and/or budgets?
-              </v-card-title>
-              <v-card-actions class="ml-2">
-                <v-radio-group
-                  class="my-0 pb-0 pl-4"
-                  v-model="questions['2']"
-                  column>
-                  <v-radio
-                    label="Yes"
-                    color="primary"
-                    value="true">
-                  </v-radio>
-                  <v-radio
-                    label="No"
-                    color="primary"
-                    value="false">
-                  </v-radio>
-                </v-radio-group>
-              </v-card-actions>
-              <!--<v-btn
-                :dark="questions['2'] !== null"
-                color="green"
-                :disabled="!questions['2']"
-                @click="step = 3"
-                class="ml-4 mb-4">
-                Continue
-              </v-btn>
-              <v-btn
-                dark
-                color="red"
-                class="ml-4 mb-4"
-                @click="step = 1">
-                Go back
-              </v-btn>-->
-            </v-card>
-            <v-btn
-              :dark="questions['2'] !== null"
-              color="green"
-              :disabled="!questions['2']"
-              @click="step = 3"
-              class="ml-1">
-              Continue
-            </v-btn>
-            <v-btn
-              dark
-              color="red"
-              class="ml-4"
-              @click="step = 1">
-              Go back
-            </v-btn>
-          </v-stepper-content>
+        <v-container
+          v-if="showStepper">
+          <v-card>
+            <v-card-title class="ml-4">Questions</v-card-title>
+            <v-divider></v-divider>
+            <v-card-content class="mx-8">
+              <v-stepper
+                v-model="step"
+                vertical
+                class="mx-8">
+                
+                <v-stepper-step
+                  class="py-2 pt-4"
+                  :complete="step > 1"
+                  step="1"
+                  color="primary">
+                  Question 1/10
+                  <small></small>
+                </v-stepper-step>
+                <v-stepper-content
+                  step="1">
+                  <v-card
+                    color="white lighten-1"
+                    class="ma-1 mb-4">
+                    <!--<v-card-title class="font-weight-regular pb-0 mx-0 py-1 primary white--text">-->
+                    <v-card-title class="font-weight-regular pb-0 mx-0 py-1 terciary white--text">
+                      Are there any type of personnel shortfalls?
+                    </v-card-title>
+                    <v-divider></v-divider>
+                    <v-card-actions class="ml-2 pb-0">
+                      <v-radio-group
+                        class="my-0 pb-0 pl-4"
+                        v-model="questions['1']"
+                        column>
+                        <v-radio
+                          label="Yes"
+                          color="primary"
+                          value="true">
+                        </v-radio>
+                        <v-radio
+                          label="No"
+                          color="primary"
+                          value="false">
+                        </v-radio>
+                      </v-radio-group>
+                    </v-card-actions>
+                    <!--<v-btn
+                      :dark="questions['1'] !== null"
+                      color="green"
+                      :disabled="!questions['1']"
+                      @click="step = 2"
+                      class="ml-4 mb-4">
+                      Continue
+                    </v-btn>-->
+                  </v-card>
+                  <!-- WHEN COPY-PASTING BE CAREFUL AND MAKE SURE YOU CHANGE question1 TO questionX, ABOVE AND BELOW -->
+                  <v-btn
+                    :dark="questions['1'] !== null"
+                    color="green"
+                    :disabled="!questions['1']"
+                    @click="step = 2"
+                    class="ml-1">
+                    Continue
+                  </v-btn>
+                </v-stepper-content>
 
-          <v-stepper-step
-            class="py-2"
-            :complete="step > 3"
-            step="3"
-            color="primary">
-            Question 3/10
-            <small></small>
-          </v-stepper-step>
-          <v-stepper-content
-            step="3">
-            <v-card
-              color="white lighten-1"
-              class="ma-1 mb-4">
-              <v-card-title class="font-weight-regular pb-0 mx-0">
-                Are you developing the wrong software functions?
-              </v-card-title>
-              <v-card-actions class="ml-2">
-                <v-radio-group
-                  class="my-0 pb-0 pl-4"
-                  v-model="questions['3']"
-                  column>
-                  <v-radio
-                    label="Yes"
-                    color="primary"
-                    value="true">
-                  </v-radio>
-                  <v-radio
-                    label="No"
-                    color="primary"
-                    value="false">
-                  </v-radio>
-                </v-radio-group>
-              </v-card-actions>
-            </v-card>
-            <v-btn
-              :dark="questions['3'] !== null"
-              color="green"
-              :disabled="!questions['3']"
-              @click="step = 4"
-              class="ml-1">
-              Continue
-            </v-btn>
-            <v-btn
-              dark
-              color="red"
-              class="ml-4"
-              @click="step = 2">
-              Go back
-            </v-btn>
-          </v-stepper-content>
+                <v-stepper-step
+                  class="py-2"
+                  :complete="step > 2"
+                  step="2"
+                  color="primary">
+                  Question 2/10
+                  <small></small>
+                </v-stepper-step>
+                <v-stepper-content
+                  step="2">
+                  <v-card
+                    color="white lighten-1"
+                    class="ma-1 mb-4">
+                    <v-card-title class="font-weight-regular pb-0 mx-0 py-1 terciary white--text">
+                      Are you using unrealistic schedules and/or budgets?
+                    </v-card-title>
+                    <v-divider></v-divider>
+                    <v-card-actions class="ml-2 pb-0">
+                      <v-radio-group
+                        class="my-0 pb-0 pl-4"
+                        v-model="questions['2']"
+                        column>
+                        <v-radio
+                          label="Yes"
+                          color="primary"
+                          value="true">
+                        </v-radio>
+                        <v-radio
+                          label="No"
+                          color="primary"
+                          value="false">
+                        </v-radio>
+                      </v-radio-group>
+                    </v-card-actions>
+                    <!--<v-btn
+                      :dark="questions['2'] !== null"
+                      color="green"
+                      :disabled="!questions['2']"
+                      @click="step = 3"
+                      class="ml-4 mb-4">
+                      Continue
+                    </v-btn>
+                    <v-btn
+                      dark
+                      color="red"
+                      class="ml-4 mb-4"
+                      @click="step = 1">
+                      Go back
+                    </v-btn>-->
+                  </v-card>
+                  <v-btn
+                    :dark="questions['2'] !== null"
+                    color="green"
+                    :disabled="!questions['2']"
+                    @click="step = 3"
+                    class="ml-1">
+                    Continue
+                  </v-btn>
+                  <v-btn
+                    dark
+                    color="red"
+                    class="ml-4"
+                    @click="step = 1">
+                    Go back
+                  </v-btn>
+                </v-stepper-content>
 
-          <v-stepper-step
-            class="py-2"
-            :complete="step > 4"
-            step="4"
-            color="primary">
-            Question 4/10
-            <small></small>
-          </v-stepper-step>
-          <v-stepper-content
-            step="4">
-            <v-card
-              color="white lighten-1"
-              class="ma-1 mb-4">
-              <v-card-title class="font-weight-regular pb-0 mx-0">
-                Are you developing the wrong user interface?
-              </v-card-title>
-              <v-card-actions class="ml-2">
-                <v-radio-group
-                  class="my-0 pb-0 pl-4"
-                  v-model="questions['4']"
-                  column>
-                  <v-radio
-                    label="Yes"
-                    color="primary"
-                    value="true">
-                  </v-radio>
-                  <v-radio
-                    label="No"
-                    color="primary"
-                    value="false">
-                  </v-radio>
-                </v-radio-group>
-              </v-card-actions>
-            </v-card>
-            <v-btn
-              :dark="questions['4'] !== null"
-              color="green"
-              :disabled="!questions['4']"
-              @click="step = 5"
-              class="ml-1">
-              Continue
-            </v-btn>
-            <v-btn
-              dark
-              color="red"
-              class="ml-4"
-              @click="step = 3">
-              Go back
-            </v-btn>
-          </v-stepper-content>
+                <v-stepper-step
+                  class="py-2"
+                  :complete="step > 3"
+                  step="3"
+                  color="primary">
+                  Question 3/10
+                  <small></small>
+                </v-stepper-step>
+                <v-stepper-content
+                  step="3">
+                  <v-card
+                    color="white lighten-1"
+                    class="ma-1 mb-4">
+                    <v-card-title class="font-weight-regular pb-0 mx-0 py-1 terciary white--text">
+                      Are you developing the wrong software functions?
+                    </v-card-title>
+                    <v-divider></v-divider>
+                    <v-card-actions class="ml-2 pb-0">
+                      <v-radio-group
+                        class="my-0 pb-0 pl-4"
+                        v-model="questions['3']"
+                        column>
+                        <v-radio
+                          label="Yes"
+                          color="primary"
+                          value="true">
+                        </v-radio>
+                        <v-radio
+                          label="No"
+                          color="primary"
+                          value="false">
+                        </v-radio>
+                      </v-radio-group>
+                    </v-card-actions>
+                  </v-card>
+                  <v-btn
+                    :dark="questions['3'] !== null"
+                    color="green"
+                    :disabled="!questions['3']"
+                    @click="step = 4"
+                    class="ml-1">
+                    Continue
+                  </v-btn>
+                  <v-btn
+                    dark
+                    color="red"
+                    class="ml-4"
+                    @click="step = 2">
+                    Go back
+                  </v-btn>
+                </v-stepper-content>
 
-          <v-stepper-step
-            class="py-2"
-            :complete="step > 5"
-            step="5"
-            color="primary">
-            Question 5/10
-            <small></small>
-          </v-stepper-step>
-          <v-stepper-content
-            step="5">
-            <v-card
-              color="white lighten-1"
-              class="ma-1 mb-4">
-              <v-card-title class="font-weight-regular pb-0 mx-0">
-                Are you adding features to the software that are only marginally useful?
-              </v-card-title>
-              <v-card-actions class="ml-2">
-                <v-radio-group
-                  class="my-0 pb-0 pl-4"
-                  v-model="questions['5']"
-                  column>
-                  <v-radio
-                    label="Yes"
-                    color="primary"
-                    value="true">
-                  </v-radio>
-                  <v-radio
-                    label="No"
-                    color="primary"
-                    value="false">
-                  </v-radio>
-                </v-radio-group>
-              </v-card-actions>
-            </v-card>
-            <v-btn
-              :dark="questions['5'] !== null"
-              color="green"
-              :disabled="!questions['5']"
-              @click="step = 6"
-              class="ml-1">
-              Continue
-            </v-btn>
-            <v-btn
-              dark
-              color="red"
-              class="ml-4"
-              @click="step = 4">
-              Go back
-            </v-btn>
-          </v-stepper-content>
+                <v-stepper-step
+                  class="py-2"
+                  :complete="step > 4"
+                  step="4"
+                  color="primary">
+                  Question 4/10
+                  <small></small>
+                </v-stepper-step>
+                <v-stepper-content
+                  step="4">
+                  <v-card
+                    color="white lighten-1"
+                    class="ma-1 mb-4">
+                    <v-card-title class="font-weight-regular pb-0 mx-0 py-1 terciary white--text">
+                      Are you developing the wrong user interface?
+                    </v-card-title>
+                    <v-divider></v-divider>
+                    <v-card-actions class="ml-2 pb-0">
+                      <v-radio-group
+                        class="my-0 pb-0 pl-4"
+                        v-model="questions['4']"
+                        column>
+                        <v-radio
+                          label="Yes"
+                          color="primary"
+                          value="true">
+                        </v-radio>
+                        <v-radio
+                          label="No"
+                          color="primary"
+                          value="false">
+                        </v-radio>
+                      </v-radio-group>
+                    </v-card-actions>
+                  </v-card>
+                  <v-btn
+                    :dark="questions['4'] !== null"
+                    color="green"
+                    :disabled="!questions['4']"
+                    @click="step = 5"
+                    class="ml-1">
+                    Continue
+                  </v-btn>
+                  <v-btn
+                    dark
+                    color="red"
+                    class="ml-4"
+                    @click="step = 3">
+                    Go back
+                  </v-btn>
+                </v-stepper-content>
 
-          <v-stepper-step
-            class="py-2"
-            :complete="step > 6"
-            step="6"
-            color="primary">
-            Question 6/10
-            <small></small>
-          </v-stepper-step>
-          <v-stepper-content
-            step="6">
-            <v-card
-              color="white lighten-1"
-              class="ma-1 mb-4">
-              <v-card-title class="font-weight-regular pb-0 mx-0">
-                Do the requirements constantly keep changing?
-              </v-card-title>
-              <v-card-actions class="ml-2">
-                <v-radio-group
-                  class="my-0 pb-0 pl-4"
-                  v-model="questions['6']"
-                  column>
-                  <v-radio
-                    label="Yes"
-                    color="primary"
-                    value="true">
-                  </v-radio>
-                  <v-radio
-                    label="No"
-                    color="primary"
-                    value="false">
-                  </v-radio>
-                </v-radio-group>
-              </v-card-actions>
-            </v-card>
-            <v-btn
-              :dark="questions['6'] !== null"
-              color="green"
-              :disabled="!questions['6']"
-              @click="step = 7"
-              class="ml-1">
-              Continue
-            </v-btn>
-            <v-btn
-              dark
-              color="red"
-              class="ml-4"
-              @click="step = 5">
-              Go back
-            </v-btn>
-          </v-stepper-content>
+                <v-stepper-step
+                  class="py-2"
+                  :complete="step > 5"
+                  step="5"
+                  color="primary">
+                  Question 5/10
+                  <small></small>
+                </v-stepper-step>
+                <v-stepper-content
+                  step="5">
+                  <v-card
+                    color="white lighten-1"
+                    class="ma-1 mb-4">
+                    <v-card-title class="font-weight-regular pb-0 mx-0 py-1 terciary white--text">
+                      Are you adding features to the software that are only marginally useful?
+                    </v-card-title>
+                    <v-divider></v-divider>
+                    <v-card-actions class="ml-2 pb-0">
+                      <v-radio-group
+                        class="my-0 pb-0 pl-4"
+                        v-model="questions['5']"
+                        column>
+                        <v-radio
+                          label="Yes"
+                          color="primary"
+                          value="true">
+                        </v-radio>
+                        <v-radio
+                          label="No"
+                          color="primary"
+                          value="false">
+                        </v-radio>
+                      </v-radio-group>
+                    </v-card-actions>
+                  </v-card>
+                  <v-btn
+                    :dark="questions['5'] !== null"
+                    color="green"
+                    :disabled="!questions['5']"
+                    @click="step = 6"
+                    class="ml-1">
+                    Continue
+                  </v-btn>
+                  <v-btn
+                    dark
+                    color="red"
+                    class="ml-4"
+                    @click="step = 4">
+                    Go back
+                  </v-btn>
+                </v-stepper-content>
 
-          <v-stepper-step
-            class="py-2"
-            :complete="step > 7"
-            step="7"
-            color="primary">
-            Question 7/10
-            <small></small>
-          </v-stepper-step>
-          <v-stepper-content
-            step="7">
-            <v-card
-              color="white lighten-1"
-              class="ma-1 mb-4">
-              <v-card-title class="font-weight-regular pb-0 mx-0">
-                Are there any shortfalls in externally furnished components?
-              </v-card-title>
-              <v-card-actions class="ml-2">
-                <v-radio-group
-                  class="my-0 pb-0 pl-4"
-                  v-model="questions['7']"
-                  column>
-                  <v-radio
-                    label="Yes"
-                    color="primary"
-                    value="true">
-                  </v-radio>
-                  <v-radio
-                    label="No"
-                    color="primary"
-                    value="false">
-                  </v-radio>
-                </v-radio-group>
-              </v-card-actions>
-            </v-card>
-            <v-btn
-              :dark="questions['7'] !== null"
-              color="green"
-              :disabled="!questions['7']"
-              @click="step = 8"
-              class="ml-1">
-              Continue
-            </v-btn>
-            <v-btn
-              dark
-              color="red"
-              class="ml-4"
-              @click="step = 6">
-              Go back
-            </v-btn>
-          </v-stepper-content>
+                <v-stepper-step
+                  class="py-2"
+                  :complete="step > 6"
+                  step="6"
+                  color="primary">
+                  Question 6/10
+                  <small></small>
+                </v-stepper-step>
+                <v-stepper-content
+                  step="6">
+                  <v-card
+                    color="white lighten-1"
+                    class="ma-1 mb-4">
+                    <v-card-title class="font-weight-regular pb-0 mx-0 py-1 terciary white--text">
+                      Do the requirements constantly keep changing?
+                    </v-card-title>
+                    <v-divider></v-divider>
+                    <v-card-actions class="ml-2 pb-0">
+                      <v-radio-group
+                        class="my-0 pb-0 pl-4"
+                        v-model="questions['6']"
+                        column>
+                        <v-radio
+                          label="Yes"
+                          color="primary"
+                          value="true">
+                        </v-radio>
+                        <v-radio
+                          label="No"
+                          color="primary"
+                          value="false">
+                        </v-radio>
+                      </v-radio-group>
+                    </v-card-actions>
+                  </v-card>
+                  <v-btn
+                    :dark="questions['6'] !== null"
+                    color="green"
+                    :disabled="!questions['6']"
+                    @click="step = 7"
+                    class="ml-1">
+                    Continue
+                  </v-btn>
+                  <v-btn
+                    dark
+                    color="red"
+                    class="ml-4"
+                    @click="step = 5">
+                    Go back
+                  </v-btn>
+                </v-stepper-content>
 
-          <v-stepper-step
-            class="py-2"
-            :complete="step > 8"
-            step="8"
-            color="primary">
-            Question 8/10
-            <small></small>
-          </v-stepper-step>
-          <v-stepper-content
-            step="8">
-            <v-card
-              color="white lighten-1"
-              class="ma-1 mb-4">
-              <v-card-title class="font-weight-regular pb-0 mx-0">
-                Are there any shortfalls in externally performed tasks?
-              </v-card-title>
-              <v-card-actions class="ml-2">
-                <v-radio-group
-                  class="my-0 pb-0 pl-4"
-                  v-model="questions['8']"
-                  column>
-                  <v-radio
-                    label="Yes"
-                    color="primary"
-                    value="true">
-                  </v-radio>
-                  <v-radio
-                    label="No"
-                    color="primary"
-                    value="false">
-                  </v-radio>
-                </v-radio-group>
-              </v-card-actions>
-            </v-card>
-            <v-btn
-              :dark="questions['8'] !== null"
-              color="green"
-              :disabled="!questions['8']"
-              @click="step = 9"
-              class="ml-1">
-              Continue
-            </v-btn>
-            <v-btn
-              dark
-              color="red"
-              class="ml-4"
-              @click="step = 7">
-              Go back
-            </v-btn>
-          </v-stepper-content>
+                <v-stepper-step
+                  class="py-2"
+                  :complete="step > 7"
+                  step="7"
+                  color="primary">
+                  Question 7/10
+                  <small></small>
+                </v-stepper-step>
+                <v-stepper-content
+                  step="7">
+                  <v-card
+                    color="white lighten-1"
+                    class="ma-1 mb-4">
+                    <v-card-title class="font-weight-regular pb-0 mx-0 py-1 terciary white--text">
+                      Are there any shortfalls in externally furnished components?
+                    </v-card-title>
+                    <v-divider></v-divider>
+                    <v-card-actions class="ml-2 pb-0">
+                      <v-radio-group
+                        class="my-0 pb-0 pl-4"
+                        v-model="questions['7']"
+                        column>
+                        <v-radio
+                          label="Yes"
+                          color="primary"
+                          value="true">
+                        </v-radio>
+                        <v-radio
+                          label="No"
+                          color="primary"
+                          value="false">
+                        </v-radio>
+                      </v-radio-group>
+                    </v-card-actions>
+                  </v-card>
+                  <v-btn
+                    :dark="questions['7'] !== null"
+                    color="green"
+                    :disabled="!questions['7']"
+                    @click="step = 8"
+                    class="ml-1">
+                    Continue
+                  </v-btn>
+                  <v-btn
+                    dark
+                    color="red"
+                    class="ml-4"
+                    @click="step = 6">
+                    Go back
+                  </v-btn>
+                </v-stepper-content>
 
-          <v-stepper-step
-            class="py-2"
-            :complete="step > 9"
-            step="9"
-            color="primary">
-            Question 9/10
-            <small></small>
-          </v-stepper-step>
-          <v-stepper-content
-            step="9">
-            <v-card
-              color="white lighten-1"
-              class="ma-1 mb-4">
-              <v-card-title class="font-weight-regular pb-0 mx-0">
-                Are there any type of real-time performance shortfalls?
-              </v-card-title>
-              <v-card-actions class="ml-2">
-                <v-radio-group
-                  class="my-0 pb-0 pl-4"
-                  v-model="questions['9']"
-                  column>
-                  <v-radio
-                    label="Yes"
-                    color="primary"
-                    value="true">
-                  </v-radio>
-                  <v-radio
-                    label="No"
-                    color="primary"
-                    value="false">
-                  </v-radio>
-                </v-radio-group>
-              </v-card-actions>
-            </v-card>
-            <v-btn
-              :dark="questions['9'] !== null"
-              color="green"
-              :disabled="!questions['9']"
-              @click="step = 10"
-              class="ml-1">
-              Continue
-            </v-btn>
-            <v-btn
-              dark
-              color="red"
-              class="ml-4"
-              @click="step = 8">
-              Go back
-            </v-btn>
-          </v-stepper-content>
+                <v-stepper-step
+                  class="py-2"
+                  :complete="step > 8"
+                  step="8"
+                  color="primary">
+                  Question 8/10
+                  <small></small>
+                </v-stepper-step>
+                <v-stepper-content
+                  step="8">
+                  <v-card
+                    color="white lighten-1"
+                    class="ma-1 mb-4">
+                    <v-card-title class="font-weight-regular pb-0 mx-0 py-1 terciary white--text">
+                      Are there any shortfalls in externally performed tasks?
+                    </v-card-title>
+                    <v-divider></v-divider>
+                    <v-card-actions class="ml-2 pb-0">
+                      <v-radio-group
+                        class="my-0 pb-0 pl-4"
+                        v-model="questions['8']"
+                        column>
+                        <v-radio
+                          label="Yes"
+                          color="primary"
+                          value="true">
+                        </v-radio>
+                        <v-radio
+                          label="No"
+                          color="primary"
+                          value="false">
+                        </v-radio>
+                      </v-radio-group>
+                    </v-card-actions>
+                  </v-card>
+                  <v-btn
+                    :dark="questions['8'] !== null"
+                    color="green"
+                    :disabled="!questions['8']"
+                    @click="step = 9"
+                    class="ml-1">
+                    Continue
+                  </v-btn>
+                  <v-btn
+                    dark
+                    color="red"
+                    class="ml-4"
+                    @click="step = 7">
+                    Go back
+                  </v-btn>
+                </v-stepper-content>
 
-          <v-stepper-step
-            class="py-2"
-            :complete="step > 10"
-            step="10"
-            color="primary">
-            Question 10/10
-            <small></small>
-          </v-stepper-step>
-          <v-stepper-content
-            step="10">
-            <v-card
-              color="white lighten-1"
-              class="ma-1 mb-4">
-              <v-card-title class="font-weight-regular pb-0 mx-0">
-                Are you straining computer-science capabilities?
-              </v-card-title>
-              <v-card-actions class="ml-2">
-                <v-radio-group
-                  class="my-0 pb-0 pl-4"
-                  v-model="questions['10']"
-                  column>
-                  <v-radio
-                    label="Yes"
-                    color="primary"
-                    value="true">
-                  </v-radio>
-                  <v-radio
-                    label="No"
-                    color="primary"
-                    value="false">
-                  </v-radio>
-                </v-radio-group>
-              </v-card-actions>
-            </v-card>
-            <v-btn
-              :dark="questions['10'] !== null"
-              color="green"
-              :disabled="!questions['10']"
-              @click="step = 11; process_results(); showStepper = false;"
-              class="ml-1">
-              Continue
-            </v-btn>
-            <v-btn
-              dark
-              color="red"
-              class="ml-4"
-              @click="step = 9">
-              Go back
-            </v-btn>
-          </v-stepper-content>
+                <v-stepper-step
+                  class="py-2"
+                  :complete="step > 9"
+                  step="9"
+                  color="primary">
+                  Question 9/10
+                  <small></small>
+                </v-stepper-step>
+                <v-stepper-content
+                  step="9">
+                  <v-card
+                    color="white lighten-1"
+                    class="ma-1 mb-4">
+                    <v-card-title class="font-weight-regular pb-0 mx-0 py-1 terciary white--text">
+                      Are there any type of real-time performance shortfalls?
+                    </v-card-title>
+                    <v-divider></v-divider>
+                    <v-card-actions class="ml-2 pb-0">
+                      <v-radio-group
+                        class="my-0 pb-0 pl-4"
+                        v-model="questions['9']"
+                        column>
+                        <v-radio
+                          label="Yes"
+                          color="primary"
+                          value="true">
+                        </v-radio>
+                        <v-radio
+                          label="No"
+                          color="primary"
+                          value="false">
+                        </v-radio>
+                      </v-radio-group>
+                    </v-card-actions>
+                  </v-card>
+                  <v-btn
+                    :dark="questions['9'] !== null"
+                    color="green"
+                    :disabled="!questions['9']"
+                    @click="step = 10"
+                    class="ml-1">
+                    Continue
+                  </v-btn>
+                  <v-btn
+                    dark
+                    color="red"
+                    class="ml-4"
+                    @click="step = 8">
+                    Go back
+                  </v-btn>
+                </v-stepper-content>
 
-        </v-stepper>
+                <v-stepper-step
+                  class="py-2"
+                  :complete="step > 10"
+                  step="10"
+                  color="primary">
+                  Question 10/10
+                  <small></small>
+                </v-stepper-step>
+                <v-stepper-content
+                  step="10">
+                  <v-card
+                    color="white lighten-1"
+                    class="ma-1 mb-4">
+                    <v-card-title class="font-weight-regular pb-0 mx-0 py-1 terciary white--text">
+                      Are you straining computer-science capabilities?
+                    </v-card-title>
+                    <v-divider></v-divider>
+                    <v-card-actions class="ml-2 pb-0">
+                      <v-radio-group
+                        class="my-0 pb-0 pl-4"
+                        v-model="questions['10']"
+                        column>
+                        <v-radio
+                          label="Yes"
+                          color="primary"
+                          value="true">
+                        </v-radio>
+                        <v-radio
+                          label="No"
+                          color="primary"
+                          value="false">
+                        </v-radio>
+                      </v-radio-group>
+                    </v-card-actions>
+                  </v-card>
+                  <v-btn
+                    :dark="questions['10'] !== null"
+                    color="green"
+                    :disabled="!questions['10']"
+                    @click="step = 11; process_results(); showStepper = false;"
+                    class="ml-1">
+                    Continue
+                  </v-btn>
+                  <v-btn
+                    dark
+                    color="red"
+                    class="ml-4"
+                    @click="step = 9">
+                    Go back
+                  </v-btn>
+                </v-stepper-content>
+              </v-stepper>
+            </v-card-content>
+          </v-card>
+        </v-container>
 
       </v-col>
     </v-row>
@@ -551,9 +569,10 @@
           v-if="!showStepper">
           <v-card class="pb-4">
             <v-card-title class="ml-4">Results</v-card-title>
+            <v-divider></v-divider>
             <v-card-content>
               <v-expansion-panels
-                class="px-8"
+                class="px-8 mt-4"
                 focusable>
                 <v-expansion-panel
                   v-for="result, i in results"
@@ -606,16 +625,16 @@
         step: 1,
 
         questions: {
-          1: null,
-          2: null,
-          3: null,
-          4: null,
-          5: null,
-          6: null,
-          7: null,
-          8: null,
-          9: null,
-          10: null,
+          1: "true",
+          2: "true",
+          3: "true",
+          4: "true",
+          5: "true",
+          6: "true",
+          7: "true",
+          8: "true",
+          9: "true",
+          10: "true",
         },
         answers: {
           1: {
