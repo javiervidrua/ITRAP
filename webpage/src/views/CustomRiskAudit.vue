@@ -320,6 +320,9 @@ export default {
         this.risks.push(this.editedItem);
       }
       this.close();
+      
+      // Store to localStorage
+      localStorage.setItem("risks", JSON.stringify(this.risks));
     },
   },
 };
