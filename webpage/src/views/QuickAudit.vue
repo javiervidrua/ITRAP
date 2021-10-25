@@ -558,7 +558,12 @@
       <v-container
         v-if="!showStepper">
         <v-card class="pb-4">
-          <v-card-title class="ml-4">Results</v-card-title>
+          <v-card-title class="ml-4">Results
+            <v-spacer></v-spacer>
+            <v-btn v-if="results.length > 0" color="grey" dark class="my-auto mx-2" @click="createPDF">
+              Download as PDF
+            </v-btn>
+          </v-card-title>
           <v-divider></v-divider>
           <v-container>
             <v-card
@@ -657,6 +662,8 @@
 </template>
 
 <script>
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
 
   export default {
     name: 'QuickAudit',
@@ -733,6 +740,29 @@
         for(let i=1; i<=10; i++){
           if(this.questions[i] === "true")
             this.results.push(this.answers[i]);
+        }
+      },
+
+      // https://gist.github.com/ChinwalPrasad/c60b9fed53218694623b9b75af679875
+      createPDF() {
+        if(this.results.length > 0){
+          var doc = new jsPDF();
+
+          for(let i=0; i<this.results.length; i++){
+            let rows = [];
+            let columnHeader = [this.results[i].question];
+            this.results[i].solutions.forEach((solution) => {
+              rows.push([solution]);
+            });
+
+            if(i==0)
+              doc.autoTable({head:[columnHeader], body:rows, startY:10 }); // New way of doing it
+            else
+              doc.autoTable({head:[columnHeader], body:rows, startY:doc.lastAutoTable['finalY'] + 20 }); // New way of doing it
+            //doc.autoTable({head:[columnHeader], body:rows, startY:10 }); // New way of doing it
+          }
+
+          doc.save('quickAudit_problemsToFix' + '.pdf');
         }
       }
     }
