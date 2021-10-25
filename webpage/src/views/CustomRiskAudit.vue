@@ -19,6 +19,12 @@
 
           <v-dialog v-model="dialog" max-width="500px">
             <template v-slot:activator="{ on, attrs }">
+              <v-btn color="grey" dark class="mb-2 mx-2" @click="loadTable">
+                Load
+              </v-btn>
+              <v-btn color="grey" dark class="mb-2 mx-2" @click="saveTable">
+                Save
+              </v-btn>
               <v-btn color="red" dark class="mb-2 mx-2" @click="dialogEmpty=true">
                 Empty the table
               </v-btn>
@@ -143,7 +149,8 @@
 
       <template v-slot:no-data>
         <v-btn
-          color="primary"
+          color="grey"
+          dark
           @click="risks = demoRisks">
           Fill with demo data
         </v-btn>
@@ -269,17 +276,25 @@ export default {
     // Whenever the variable risks changes
     risks: function () {
       // Store to localStorage
-      localStorage.setItem("risks", JSON.stringify(this.risks));
+      //localStorage.setItem("risks", JSON.stringify(this.risks));
     },
   },
 
   // When the webapp is created
   created() {
     // Load from localStorage
-    this.risks = JSON.parse(localStorage.getItem("risks"));
+    //this.risks = JSON.parse(localStorage.getItem("risks"));
   },
 
   methods: {
+    loadTable() {
+      if( JSON.parse(localStorage.getItem('risks')).length > 0 )
+        this.risks = JSON.parse(localStorage.getItem('risks'));
+    },
+    saveTable() {
+      localStorage.setItem('risks', JSON.stringify(this.risks));
+    },
+
     editItem(item) {
       this.editedIndex = this.risks.indexOf(item);
       this.editedItem = Object.assign({}, item);
@@ -322,7 +337,7 @@ export default {
       this.close();
       
       // Store to localStorage
-      localStorage.setItem("risks", JSON.stringify(this.risks));
+      //localStorage.setItem("risks", JSON.stringify(this.risks));
     },
   },
 };
