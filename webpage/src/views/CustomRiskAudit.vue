@@ -143,7 +143,8 @@
 
       <template v-slot:no-data>
         <v-btn
-          color="primary"
+          color="grey"
+          dark
           @click="risks = demoRisks">
           Fill with demo data
         </v-btn>
