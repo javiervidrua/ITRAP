@@ -1,9 +1,9 @@
 <template>
   <v-container>
     <v-data-table
-      red="table"
+      ref="table"
       :headers="headers"
-      :items="risks"
+      :items="items"
       :sort-by="['probability', 'consequences']"
       :sort-desc="[true, true]"
       :items-per-page="-1"
@@ -32,6 +32,7 @@
             </template>
             <v-card>
               <v-card-title>
+                <!--<span class="text-h5">{{ formTitle }}</span>-->
                 <span class="text-h5">{{ formTitle }}</span>
               </v-card-title>
               <v-divider></v-divider>
@@ -126,7 +127,7 @@
               <v-divider></v-divider>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="green" dark @click="risks=[]; dialogEmpty=false">OK</v-btn>
+                <v-btn color="green" dark @click="items=[]; dialogEmpty=false">OK</v-btn>
                 <v-btn color="red" dark @click="dialogEmpty=false">Cancel</v-btn>
                 <v-spacer></v-spacer>
               </v-card-actions>
@@ -136,7 +137,8 @@
         </v-toolbar>
       </template>
 
-      <template v-slot:item.actions="{ item }">
+      <!--<template v-slot:item.actions="{ item }">-->
+      <template v-slot:[`item.actions`]="{ item }">
         <v-icon small class="mr-2" @click="editItem(item)">
           mdi-pencil
         </v-icon>
@@ -149,7 +151,7 @@
         <v-btn
           color="grey"
           dark
-          @click="risks = demoRisks">
+          @click="items = demoRisks">
           Fill with demo data
         </v-btn>
       </template>
@@ -174,18 +176,13 @@ export default {
       dialogDelete: false,
       dialogEmpty: false,
       headers: [
-        {
-          text: "Risk",
-          align: "start",
-          sortable: true,
-          value: "name",
-        },
+        { text: "Risk", align: "start", value: "name"},
         { text: "Category", value: "category" },
         { text: "Probability (1-5)", value: "probability" },
         { text: "Consequences (1-5)", value: "consequences" },
         { text: "Actions", value: "actions", sortable: false },
       ],
-      risks: [],
+      items: [],
       demoRisks: [
         {
           name: "The client will change the requirements",
@@ -274,9 +271,10 @@ export default {
       val || this.closeDelete();
     },
     // Whenever the variable risks changes
-    risks: function () {
+    items: function () {
       // Store to localStorage
-      localStorage.setItem("risks", JSON.stringify(this.risks));
+      if(JSON.stringify(this.items) != null)
+        localStorage.setItem("risks", JSON.stringify(this.items));
     },
   },
 
@@ -284,24 +282,24 @@ export default {
   created() {
     // Load from localStorage
     if(localStorage.risks != "null")
-      this.risks = JSON.parse(localStorage.getItem("risks"));
+      this.items = JSON.parse(localStorage.getItem("risks")) || [];
   },
 
   methods: {
     editItem(item) {
-      this.editedIndex = this.risks.indexOf(item);
+      this.editedIndex = this.items.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
     },
 
     deleteItem(item) {
-      this.editedIndex = this.risks.indexOf(item);
+      this.editedIndex = this.items.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialogDelete = true;
     },
 
     deleteItemConfirm() {
-      this.risks.splice(this.editedIndex, 1);
+      this.items.splice(this.editedIndex, 1);
       this.closeDelete();
     },
 
@@ -323,14 +321,14 @@ export default {
 
     save() {
       if (this.editedIndex > -1) {
-        Object.assign(this.risks[this.editedIndex], this.editedItem);
+        Object.assign(this.items[this.editedIndex], this.editedItem);
       } else {
-        this.risks.push(this.editedItem);
+        this.items.push(this.editedItem);
       }
       this.close();
       
       // Store to localStorage
-      localStorage.setItem("risks", JSON.stringify(this.risks));
+      localStorage.setItem("risks", JSON.stringify(this.items));
     },
 
     // https://gist.github.com/ChinwalPrasad/c60b9fed53218694623b9b75af679875
@@ -338,7 +336,7 @@ export default {
       //var source =  this.$refs["table"];
       let rows = [];
       let columnHeader = ['Name', 'Category', 'Probability (1-5)', 'Consequences (1-5)'];
-      this.risks.forEach(element => {
+      this.items.forEach(element => {
         var temp = [
           element.name,
           element.category,
