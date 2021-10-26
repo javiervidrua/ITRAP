@@ -19,6 +19,9 @@
 
           <v-dialog v-model="dialog" max-width="500px">
             <template v-slot:activator="{ on, attrs }">
+              <v-btn color="grey" dark class="mb-2 mx-2" @click="createPDF">
+                Download as PDF
+              </v-btn>
               <v-btn color="grey" dark class="mb-2 mx-2" @click="loadTable">
                 Load
               </v-btn>
@@ -160,6 +163,8 @@
 </template>
 
 <script>
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
 // Save to localstorage: localStorage.setItem("key", "value");
 // Load from localstorage: localStorage.getItem("key");
 
@@ -339,6 +344,27 @@ export default {
       // Store to localStorage
       //localStorage.setItem("risks", JSON.stringify(this.risks));
     },
+
+    createPDF(){
+      //var source =  this.$refs["table"];
+      let rows = [];
+      let columnHeader = ['Name', 'Category', 'Probability (1-5)', 'Consequences (1-5)'];
+      this.risks.forEach(element => {
+        var temp = [
+          element.name,
+          element.category,
+          element.probability,
+          element.consequences,
+        ];
+        rows.push(temp);
+      });
+      var doc = new jsPDF();
+      //doc.autoTable(columnHeader, rows, { startY: 10 }); // Deprecated
+      // https://openbase.com/js/jspdf-autotable/documentation
+      doc.autoTable({head:[columnHeader], body:rows, startY:10 }); // New way of doing it
+      //doc.autoTable({head:[columnHeader], body:rows, html:source, startY:doc.lastAutoTable.finalY + 20 }); // New way of doing it
+      doc.save("customRiskAudit" + '.pdf');
+    }
   },
 };
 </script>
