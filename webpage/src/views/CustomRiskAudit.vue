@@ -283,7 +283,8 @@ export default {
   // When the webapp is created
   created() {
     // Load from localStorage
-    this.risks = JSON.parse(localStorage.getItem("risks"));
+    if(localStorage.risks != "null")
+      this.risks = JSON.parse(localStorage.getItem("risks"));
   },
 
   methods: {
