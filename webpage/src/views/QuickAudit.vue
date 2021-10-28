@@ -8,11 +8,12 @@
         <v-card>
           <v-card-title class="ml-4">Questionary</v-card-title>
           <v-divider></v-divider>
-          <v-container>
+          <v-container class="ma-0 pa-0">
             <v-stepper
               v-model="step"
               vertical
-              class="mx-8 pb-0">
+              class="ma-0 pa-0"
+              flat>
               
               <v-stepper-step
                 class="py-2 pt-4"
@@ -556,7 +557,8 @@
       </v-container>
 
       <v-container
-        v-if="!showStepper">
+        v-if="!showStepper"
+        class="mb-0 pb-0">
         <v-card class="pb-4">
           <v-card-title class="ml-4">Results
             <v-spacer></v-spacer>
@@ -565,22 +567,24 @@
             </v-btn>
           </v-card-title>
           <v-divider></v-divider>
-          <v-container>
+          <v-container class="ma-0 pa-0">
             <v-card
               v-if="results.length === 0"
-              class="ml-8 mt-8 mr-8 mb-2">
+              class="ma-0 pb-0"
+              flat>
               <v-card-title class="green white--text">
                 Congratulations!
               </v-card-title>
               <v-divider></v-divider>
-              <v-card-text class="font-weight-medium">
+              <v-card-text class="font-weight-medium mt-4">
                 You have no software risks!
               </v-card-text>
             </v-card>
 
             <v-card
               v-if="results.length !== 0"
-              class="ml-8 mt-8 mr-8 mb-2">
+              class="ma-0 pb-0"
+              flat>
               <v-card-title class="red white--text">There are some problems to fix</v-card-title>
               <v-divider></v-divider>
               <v-card-actions>
