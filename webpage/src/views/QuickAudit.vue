@@ -540,13 +540,13 @@
                   color="green"
                   :disabled="!questions['10']"
                   @click="step = 11; process_results(); showStepper = false;"
-                  class="ml-1 mb-1">
+                  class="ml-1 mb-4">
                   Continue
                 </v-btn>
                 <v-btn
                   dark
                   color="red"
-                  class="ml-4 mb-1"
+                  class="ml-4 mb-4"
                   @click="step = 9">
                   Go back
                 </v-btn>
